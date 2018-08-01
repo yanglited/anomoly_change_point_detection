@@ -64,19 +64,20 @@ def main():
     numOfEvents = 2
     # stateVector = np.asarray([1,1,0,1,0,0,1,1,1,0,1,1,1,1,0,0])
     # stateVector = np.asarray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
-    stateVector = np.asarray([1,0])
+    stateVector = np.asarray([0,1])
     # stateVector = np.random.randint(2, size=numOfEvents)
     sojournTimeVector = np.random.randint(1, high=300, size=numOfEvents)
     groundTruth = np.repeat(stateVector, sojournTimeVector)
     numberOfSamples = np.sum(sojournTimeVector)
 
-    sigma = 1.0
+    sigma = 0.3
     np.random.seed()
     samples1 = sigma * np.random.randn(groundTruth.size) + groundTruth
     samples2 = sigma * np.random.randn(groundTruth.size) + groundTruth
     samples3 = sigma * np.random.randn(groundTruth.size) + groundTruth
+    samples4 = sigma * np.random.randn(groundTruth.size) + groundTruth
 
-    samples = np.vstack((samples1, samples2, samples3))
+    samples = np.vstack((samples1, samples2, samples3, samples4))
     # samples = samples1
     threshold = numberOfSamples/3.0
     detector = Qdetector(30, samples)
