@@ -61,18 +61,25 @@ class Qdetector(object):
         #     print("Change point detected at sample # %d.", self.changePoint)
 
 def main():
-    numOfEvents = 2
+    #Choose one of the following state vectors as needed.
     # stateVector = np.asarray([1,1,0,1,0,0,1,1,1,0,1,1,1,1,0,0])
-    # stateVector = np.asarray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
+    stateVector = np.asarray([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])
+    stateVector = np.asarray([0,0,0,0,0,1])
+    stateVector = np.asarray([0,0,1,1,0,0])
     stateVector = np.asarray([0,1])
+    numOfEvents = len(stateVector)
     # stateVector = np.random.randint(2, size=numOfEvents)
     sojournTimeVector = np.random.randint(1, high=300, size=numOfEvents)
+    sojournTimeVector[-1] = 20
     groundTruth = np.repeat(stateVector, sojournTimeVector)
     numberOfSamples = np.sum(sojournTimeVector)
 
-    sigma = 0.3
+    sigma = 0.8
     np.random.seed()
     samples1 = sigma * np.random.randn(groundTruth.size) + groundTruth
+    # samples2 = sigma * np.random.randn(groundTruth.size) + np.zeros_like(groundTruth)
+    # samples3 = sigma * np.random.randn(groundTruth.size) + np.zeros_like(groundTruth)
+    # samples4 = sigma * np.random.randn(groundTruth.size) + np.zeros_like(groundTruth)
     samples2 = sigma * np.random.randn(groundTruth.size) + groundTruth
     samples3 = sigma * np.random.randn(groundTruth.size) + groundTruth
     samples4 = sigma * np.random.randn(groundTruth.size) + groundTruth
