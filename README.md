@@ -8,6 +8,11 @@ doi: 10.1109/TW.2013.060413.121814 Link: https://ieeexplore.ieee.org/document/65
 
 [2] M. D. Holland, “A nonparametric change point model for multivariate
 phase-II statistical process control,” Ph.D. dissertation, 2011.
+
+Links:
+
 https://experts.umn.edu/en/publications/a-control-chart-based-on-a-nonparametric-multivariate-change-poin
+
 https://www.semanticscholar.org/paper/A-nonparametric-change-point-model-for-multivariate-Holland/b7da5bb7b2f91a1a0c6b9a2b8a0392488f9d88ab
+
 http://www.mbswonline.com/upload/presentation_6-2-2011-8-20-36.pdf
