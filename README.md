@@ -1,4 +1,4 @@
-# change_point_detection
+# Multivariate Anomoly Detection/Process Change Point Detection
 A python example of non-parametric multivariate change point detection algorithm. 
 ![alt text](example.png)
 
