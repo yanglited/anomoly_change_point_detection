@@ -46,13 +46,13 @@ det.Rkn                    # the full test statistic, one value per sample
 We observe $n$ vectors $Z_1,\dots,Z_n \in \mathbb{R}^d$ (one entry per sensor). Question: did the
 distribution change at some unknown time $k$?
 
-$$H_0:\; Z_1,\dots,Z_n \sim F \qquad\text{vs}\qquad H_1:\; Z_1,\dots,Z_k \sim F,\; Z_{k+1},\dots,Z_n \sim G \ne F$$
+$$H_0:; Z_1,\dots,Z_n \sim F \qquad\text{vs}\qquad H_1:; Z_1,\dots,Z_k \sim F,; Z_{k+1},\dots,Z_n \sim G \ne F$$
 
 We want to do this **without knowing $F$ or $G$**. The trick is to replace values with ranks.
 
 ### 1. Spatial ranks: a multivariate rank
 
-In 1-D, the rank of $Z_i$ is (up to scaling) $\sum_j \operatorname{sign}(Z_i - Z_j)$. The
+In 1-D, the rank of $Z_i$ is (up to scaling) $\sum_j \mathrm{sign}(Z_i - Z_j)$. The
 multivariate analogue uses the **spatial sign** $S(x) = x/\lVert x\rVert$, a unit vector:
 
 $$R(Z_i) = \sum_{j \ne i} \frac{Z_i - Z_j}{\lVert Z_i - Z_j\rVert}$$
@@ -71,17 +71,17 @@ all point roughly the same direction and their mean is far from zero. Define
 
 $$\bar R_k = \frac{1}{k}\sum_{i=1}^{k} R(Z_i)$$
 
-Under $H_0$ the $Z_i$ are exchangeable, so $\{R(Z_1),\dots,R(Z_n)\}$ is a fixed set of $n$ vectors
+Under $H_0$ the $Z_i$ are exchangeable, so $\lbrace R(Z_1),\dots,R(Z_n)\rbrace $ is a fixed set of $n$ vectors
 summing to zero and the first $k$ are a **random sample of size $k$ without replacement** from it.
 Elementary finite-population sampling gives, exactly and for any $F$,
 
 $$\mathbb{E}[\bar R_k] = 0, \qquad
-\operatorname{Cov}(\bar R_k) = \Sigma_k = \frac{n-k}{(n-1)\,n\,k}\sum_{i=1}^{n} R(Z_i)R(Z_i)^{\mathsf T}$$
+\mathrm{Cov}(\bar R_k) = \Sigma_k = \frac{n-k}{(n-1)\thinspace n\thinspace k}\sum_{i=1}^{n} R(Z_i)R(Z_i)^{\mathsf T}$$
 
 (the familiar $\frac{N-k}{k(N-1)}\sigma^2$ correction, with the population variance written out).
 Standardise the mean by its own covariance, a Mahalanobis distance:
 
-$$R_{k,n} = \bar R_k^{\mathsf T}\,\Sigma_k^{-1}\,\bar R_k$$
+$$R_{k,n} = \bar R_k^{\mathsf T}\thinspace \Sigma_k^{-1}\thinspace \bar R_k$$
 
 Under $H_0$, $\bar R_k$ is a sum of many bounded terms, so $R_{k,n} \approx \chi^2_d$ for every $k$:
 a flat line at height about $d$. Under $H_1$ it peaks at the true change, because $\bar R_k$ grows
@@ -107,7 +107,7 @@ The principled rule is: declare a change if $\max_k R_{k,n}$ exceeds a threshold
 chosen for a target false-alarm rate (by simulation or by permuting the sample). `qdetector.py`
 uses a cheaper proxy:
 
-$$\frac{\operatorname{Var}_k(R_{k,n})}{\operatorname{Mean}_k(R_{k,n})} \ge 3$$
+$$\frac{\mathrm{Var}_k(R_{k,n})}{\mathrm{Mean}_k(R_{k,n})} \ge 3$$
 
 Under $H_0$ the curve is roughly $\chi^2_d$ everywhere, so variance $\approx 2d$ and mean
 $\approx d$: the ratio sits near $2$. A genuine change produces a sharp peak that inflates the
@@ -116,7 +116,7 @@ with a stated size; replace it with a calibrated $h$ if you need a controlled fa
 
 ### 5. Cost
 
-Computing all pairwise spatial signs is $O(d\,n^2)$ time and memory. The quadratic form for all
+Computing all pairwise spatial signs is $O(d\thinspace n^2)$ time and memory. The quadratic form for all
 $k$ is $O(d^2 n)$ once $\sum_i R R^{\mathsf T}$ is known, since $\Sigma_k$ is that one matrix times
 a scalar. Fine for thousands of samples; for streaming use, run it on a sliding window.
 
